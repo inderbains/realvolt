@@ -1,3 +1,4 @@
+import LogoutButton from "./LogoutButton";
 import Link from "next/link";
 import {
   LayoutDashboard, Users, KanbanSquare, Contact, House, FolderKanban, Megaphone,
