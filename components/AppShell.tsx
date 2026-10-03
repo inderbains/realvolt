@@ -56,7 +56,14 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       <main className="main">
         <header className="topbar">
           <div className="top-search"><Search size={16}/> Search clients, properties, transactions…</div>
-          <div className="top-actions"><span className="badge">Brokerage workspace</span><button className="btn"><Bell size={17}/></button><div className="avatar">RV</div></div>
+<div className="top-actions">
+  <span className="badge">Brokerage workspace</span>
+  <LogoutButton />
+  <button className="btn">
+    <Bell size={17} />
+  </button>
+  <div className="avatar">RV</div>
+</div>
         </header>
         {children}
       </main>
