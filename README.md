@@ -137,3 +137,8 @@ Agent/brokerage splits and deductions are calculated separately from the trust r
 ## Production notes
 
 The application contains working Supabase reads, auth plumbing, invite/email/form API foundations and the full operating UI. Before handling live trust/accounting data, complete brokerage-specific testing, authorization review, accounting controls, backups, and legal/compliance review for your jurisdiction and brokerage policies.
+
+## v1.0.1 build-hardening
+- Fixed strict TypeScript rendering of Supabase `unknown` CRM fields by explicitly narrowing email/phone conditions.
+- Shared UI now imports `ReactNode` explicitly rather than relying on the global React namespace.
+- Retains the clean single `(app)` route group and Webpack Hostinger build.

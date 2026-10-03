@@ -1,18 +1,19 @@
+import type { ReactNode } from 'react';
 import type { LucideIcon } from 'lucide-react';
 
-export function PageHeader({ title, description, action }: { title: string; description?: string; action?: React.ReactNode }) {
+export function PageHeader({ title, description, action }: { title: string; description?: string; action?: ReactNode }) {
   return <div className="page-header"><div><h1>{title}</h1>{description && <p>{description}</p>}</div>{action && <div className="page-actions">{action}</div>}</div>;
 }
 
-export function StatCard({ label, value, icon: Icon, hint }: { label: string; value: React.ReactNode; icon: LucideIcon; hint?: string }) {
+export function StatCard({ label, value, icon: Icon, hint }: { label: string; value: ReactNode; icon: LucideIcon; hint?: string }) {
   return <div className="stat-card"><span className="stat-icon"><Icon size={20}/></span><div><span>{label}</span><strong>{value}</strong>{hint && <small>{hint}</small>}</div></div>;
 }
 
-export function SectionCard({ title, description, action, children }: { title: string; description?: string; action?: React.ReactNode; children: React.ReactNode }) {
+export function SectionCard({ title, description, action, children }: { title: string; description?: string; action?: ReactNode; children: ReactNode }) {
   return <section className="section-card"><div className="section-head"><div><h2>{title}</h2>{description && <p>{description}</p>}</div>{action}</div>{children}</section>;
 }
 
-export function Badge({ children, tone='neutral' }: { children: React.ReactNode; tone?: 'neutral'|'success'|'warning'|'danger'|'info' }) {
+export function Badge({ children, tone='neutral' }: { children: ReactNode; tone?: 'neutral'|'success'|'warning'|'danger'|'info' }) {
   return <span className={`badge ${tone === 'neutral' ? '' : tone}`}>{children}</span>;
 }
 
