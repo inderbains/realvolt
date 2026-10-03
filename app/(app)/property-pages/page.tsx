@@ -1,0 +1,6 @@
+import Link from "next/link";
+import PageHeader from "@/components/PageHeader";
+import { Globe2, QrCode, BarChart3, Plus } from "lucide-react";
+export default function PropertyPages(){
+ return <div className="page"><PageHeader title="Property Pages" description="Create branded listing websites using listing data and the Realtor profile." actions={<Link className="btn btn-primary" href="/property-pages/new"><Plus size={16}/> Create property page</Link>}/><div className="stats"><div className="stat"><div className="stat-top">Published <Globe2 size={17}/></div><div className="stat-value">12</div></div><div className="stat"><div className="stat-top">Page views <BarChart3 size={17}/></div><div className="stat-value">4,821</div></div><div className="stat"><div className="stat-top">QR scans <QrCode size={17}/></div><div className="stat-value">638</div></div><div className="stat"><div className="stat-top">Leads</div><div className="stat-value">73</div></div></div><div className="module-grid">{["123 Main Street · realvolt.ca/p/123-main-st","16888 Ocean View · 16888oceanview.ca","4708 232 Street · commercial template"].map(x=><div className="module-card" key={x}><span className="badge-green badge">Published</span><h3 style={{marginTop:12}}>{x}</h3><p>Gallery, Realtor profile, inquiry form, analytics, QR code and domain controls.</p></div>)}</div></div>
+}

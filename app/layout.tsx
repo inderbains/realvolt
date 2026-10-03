@@ -1,8 +1,8 @@
-import './globals.css';
+import "./globals.css";
 
 export const metadata = {
-  title: 'RealVolt Brokerage OS',
-  description: 'CRM, transactions, back office, trust accounting and brokerage operations.',
+  title: "RealVolt — Real Estate Operating System",
+  description: "CRM, transactions, property marketing and brokerage back office in one platform."
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
