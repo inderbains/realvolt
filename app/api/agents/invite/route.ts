@@ -1,0 +1,6 @@
+import { NextResponse } from 'next/server';
+import { z } from 'zod';
+import { requireBrokerStaff } from '@/lib/permissions';
+import { createSupabaseAdmin } from '@/lib/admin';
+const Schema=z.object({email:z.string().email(),brokerage_id:z.string().uuid(),role:z.string().default('agent'),agent_split_pct:z.number().min(0).max(100).default(70),monthly_fee:z.number().min(0).default(0),transaction_fee:z.number().min(0).default(0)});
+export async function POST(req:Request){try{await requireBrokerStaff();const body=Schema.parse(await req.json());const admin=createSupabaseAdmin();const redirectTo=`${process.env.NEXT_PUBLIC_APP_URL??''}/auth/callback?next=/dashboard`;const {data,error}=await admin.auth.admin.inviteUserByEmail(body.email,{redirectTo,data:{brokerage_id:body.brokerage_id,role:body.role}});if(error) return NextResponse.json({error:error.message},{status:400});if(data.user){await admin.from('profiles').upsert({id:data.user.id,email:body.email,brokerage_id:body.brokerage_id,role:body.role,default_commission_split_pct:body.agent_split_pct,monthly_fee:body.monthly_fee,transaction_fee:body.transaction_fee});}return NextResponse.json({ok:true,user_id:data.user?.id});}catch(error){return NextResponse.json({error:error instanceof Error?error.message:'Invite failed'},{status:400});}}

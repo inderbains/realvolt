@@ -1,0 +1,5 @@
+import { NextResponse } from 'next/server';
+import { z } from 'zod';
+import { requireBrokerStaff } from '@/lib/permissions';
+const Schema=z.object({to:z.union([z.string().email(),z.array(z.string().email()).min(1)]),subject:z.string().min(1).max(200),html:z.string().min(1)});
+export async function POST(req:Request){try{await requireBrokerStaff();const key=process.env.RESEND_API_KEY;const from=process.env.REALVOLT_FROM_EMAIL;if(!key||!from) return NextResponse.json({error:'Email provider is not configured'},{status:503});const body=Schema.parse(await req.json());const response=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:`Bearer ${key}`,'Content-Type':'application/json'},body:JSON.stringify({from,to:body.to,subject:body.subject,html:body.html})});const json=await response.json();return NextResponse.json(json,{status:response.status});}catch(error){const message=error instanceof Error?error.message:'Unable to send';return NextResponse.json({error:message},{status:message==='Unauthorized'?401:403});}}
